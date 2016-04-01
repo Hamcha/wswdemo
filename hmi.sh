@@ -1,0 +1,1 @@
+./wswdemo -demofolder=/root/.warsow-2.1/basewsw/demos/server

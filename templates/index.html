@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+    <title>Crunchy Rockets</title>
+    <style>
+    body {
+        font-family: sans-serif;
+    }
+    .demos {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+    .demo {
+        display: flex;
+        flex-direction: column;
+        flex: 0 1 auto;
+        order: 0;
+        align-self: auto;
+        border: 1px solid #ccc;
+        margin: 0.5rem;
+        padding: 0.5rem;
+        max-width: 400px;
+        position: relative;
+    }
+    .match {
+        display: flex;
+        flex-direction: row;
+    }
+    .info {
+        background: rgba(255,255,255,0.5);
+        border-radius: 5px;
+        padding: 0.5rem;
+    }
+    .fname, .date {
+        font-size: 0.9rem;
+        text-align: center;
+        font-weight: bold;
+    }
+    .fname { margin-top: 0.5rem; }
+    .date  { margin-bottom: 0.5rem; }
+    .pic {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        overflow: hidden;
+        z-index: -10;
+    }
+    .levelpic { width: 100%; margin-top: -150px; opacity: 0.35; }
+    </style>
+</head>
+<body>
+<h1>Demo archive</h1>
+<div id="demos">
+{{range .Demos}}
+    <div class="demo">
+        <div class="date">{{.TimeStr}}</div>
+        <div class="match">
+            <div class="pic">
+                <img src="https://www.warsow.gg/site-images/levelshots/{{.MapID}}.jpg" class="levelpic" />
+            </div>
+            <div class="info">
+                <div>{{.GameType}} - {{.DurationStr}}</div>
+                {{if .IsDuel}}
+                <div>{{.Player1}} ({{.Score1}}) vs {{.Player2}} ({{.Score2}})</div>
+                {{end}}
+                <div>{{.MapID}} {{if .MapName}}({{.MapName}}){{end}}</div>
+            </div>
+        </div>
+        <div class="fname"><a href="{{.URL}}">{{truncate .Filename}} ({{.SizeStr}})</a></div>
+    </div>
+{{else}}
+    <h2>No demos found..</h2>
+{{end}}
+</div>
+</body>
+</html>
