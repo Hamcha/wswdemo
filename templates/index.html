@@ -165,6 +165,7 @@
 {{if .Others}}
 <h4>Showing {{len .Duels}} demos, most recent first</h4>
 {{end}}
+<div class="demos">
 {{range .Others}}
 	<div class="demo other">
 	<a title="{{.Filename}}" href="{{$.BaseURL}}{{.URL}}">

@@ -65,7 +65,7 @@ func main() {
 	bind := flag.String("bind", ":8353", "Address:Port to bind the webserver to")
 	demos = flag.String("demofolder", "demos", "Folder containing the demos to serve")
 	root = flag.String("root", ".", "Folder containing the static and templates folders")
-	basepath = flag.String("basepath", "/", "Base URL from which the page is accessed")
+	basepath = flag.String("basepath", "", "Base URL from which the page is accessed")
 	flag.Parse()
 
 	http.Handle(*basepath+"/static/", http.StripPrefix(*basepath+"/static/", http.FileServer(http.Dir(filepath.Join(*root, "static")))))
