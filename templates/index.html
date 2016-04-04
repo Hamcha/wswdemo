@@ -1,77 +1,187 @@
 <!doctype html>
 <html>
 <head>
-    <title>Crunchy Rockets</title>
-    <style>
-    body {
-        font-family: sans-serif;
-    }
-    .demos {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        justify-content: flex-start;
-        align-items: flex-start;
-    }
-    .demo {
-        display: flex;
-        flex-direction: column;
-        flex: 0 1 auto;
-        order: 0;
-        align-self: auto;
-        border: 1px solid #ccc;
-        margin: 0.5rem;
-        padding: 0.5rem;
-        max-width: 400px;
-        position: relative;
-    }
-    .match {
-        display: flex;
-        flex-direction: row;
-    }
-    .info {
-        background: rgba(255,255,255,0.5);
-        border-radius: 5px;
-        padding: 0.5rem;
-    }
-    .fname, .date {
-        font-size: 0.9rem;
-        text-align: center;
-        font-weight: bold;
-    }
-    .fname { margin-top: 0.5rem; }
-    .date  { margin-bottom: 0.5rem; }
-    .pic {
-        position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        overflow: hidden;
-        z-index: -10;
-    }
-    .levelpic { width: 100%; margin-top: -150px; opacity: 0.35; }
-    </style>
+	<title>Crunchy Rockets</title>
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes, target-densitydpi=device-dpi, minimal-ui" />
+	<style>
+	@import url(https://fonts.googleapis.com/css?family=Lato:400,700);
+	@font-face {
+		font-family: 'HemiHead';
+		font-style: normal;
+		font-weight: normal;
+		src: local('HemiHeadFourTwentySix-Regular'), url('static/hemi head 426.woff') format('woff');
+	}
+	@font-face {
+		font-family: 'Warsow';
+		font-style: normal;
+		font-weight: normal;
+		src: local('warsow-Regular'), url('static/ldrwswbeta.woff') format('woff');
+	}
+	body {
+		font-family: 'Lato', sans-serif;
+		background: fixed linear-gradient(to bottom, #123 0%, #456 50%, #123 100%);
+		color: #fff;
+	}
+	.demos {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+		align-items: flex-start;
+	}
+	.demo {
+		color: #fff;
+		display: flex;
+		flex-direction: column;
+		flex: 1 auto;
+		order: 0;
+		align-self: auto;
+		box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+		margin: 0.5rem;
+		max-width: 500px;
+		min-width: 280px;
+		height: auto;
+		position: relative;
+	}
+	.match {
+		display: flex;
+		flex-direction: column;
+	}
+	.info {
+		padding: 0.5rem 0 0 0;
+		display: flex;
+		font-size: 0.8rem;
+		font-family: 'Warsow', sans-serif;
+		justify-content: space-around;
+		background: linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0) 100%);
+	}
+	.fname, .date {
+		text-align: center;
+		font-weight: bold;
+	}
+	.fname {
+		font-size: 0.9rem;
+		padding: 0.3rem 0 0.5rem 0;
+		background-color: rgba(0,0,0,0.7);
+	}
+	.date  {
+		padding: 0.3rem;
+		background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0) 100%);
+	}
+	.pic {
+		position: absolute;
+		top: 0; left: 0; right: 0; bottom: 0;
+		overflow: hidden;
+		z-index: -10;
+	}
+	.duelinfo {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-around;
+		padding: 0.5rem;
+		background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0) 100%);
+	}
+	.player1, .vs, .player2 {
+		font-family: "HemiHead", "Source Sans Pro", sans-serif;
+		text-align: center;
+		flex: 120px 1;
+	}
+	.player1 .name, .player2 .name {
+		font-size: 1.5rem;
+	}
+	.player1 .score, .player2 .score {
+		margin-top: -0.3rem;
+		margin-bottom: -0.5rem;
+		font-size: 1.2rem;
+	}
+	.vs {
+		flex: 0.3 50px;
+		font-size: 1.4rem;
+		padding-right: 0.5rem;
+	}
+	.levelpic {
+		width: 100%; margin-top: -22%;
+	}
+	a, a:visited { text-decoration: none; color: inherit;}
+	.fname { color:#fa1; text-decoration: underline; }
+
+	.other .levelpic { margin-top: -100px; }
+	.other .date {
+		background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 100%);
+	}
+	.other .info { padding: 0.5rem; background: rgba(0,0,0,0.3); }
+	.other .fname { padding: 0.5rem; background: linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 100%); }
+	h1, h2, h3, h4 {
+		font-family: 'Warsow', sans-serif;
+		padding: 0; margin: 0;
+	}
+	h1 { margin: 1rem; }
+	h2 { margin: 1rem; }
+	h3 { margin: 1rem 2rem; font-weight: normal; }
+	h4 { margin: 1rem; margin-top: -1rem; font-weight: normal; }
+	</style>
 </head>
 <body>
-<h1>Demo archive</h1>
-<div id="demos">
-{{range .Demos}}
-    <div class="demo">
-        <div class="date">{{.TimeStr}}</div>
-        <div class="match">
-            <div class="pic">
-                <img src="https://www.warsow.gg/site-images/levelshots/{{.MapID}}.jpg" class="levelpic" />
-            </div>
-            <div class="info">
-                <div>{{.GameType}} - {{.DurationStr}}</div>
-                {{if .IsDuel}}
-                <div>{{.Player1}} ({{.Score1}}) vs {{.Player2}} ({{.Score2}})</div>
-                {{end}}
-                <div>{{.MapID}} {{if .MapName}}({{.MapName}}){{end}}</div>
-            </div>
-        </div>
-        <div class="fname"><a href="{{.URL}}">{{truncate .Filename}} ({{.SizeStr}})</a></div>
-    </div>
+<h1>Crunchy rockets demo archive</h1>
+<h2>Duels</h2>
+{{if .Duels}}
+<h4>Showing {{len .Duels}} demos, most recent first</h4>
+{{end}}
+<div class="demos">
+{{range .Duels}}
+	<div class="demo">
+	<a title="{{.Filename}}" href="{{.URL}}">
+		<div class="date">{{.TimeStr}}</div>
+		<div class="match">
+			<div class="pic">
+				<img src="https://www.warsow.gg/site-images/levelshots/{{.MapID}}.jpg" class="levelpic" />
+			</div>
+			<div class="duelinfo">
+				<div class="player1">
+					<div class="name">{{.Player1}}</div>
+					<div class="score">{{.Score1}}</div>
+				</div>
+				<div class="vs">vs</div>
+				<div class="player2">
+					<div class="name">{{.Player2}}</div>
+					<div class="score">{{.Score2}}</div>
+				</div>
+			</div>
+			<div class="info">
+				<div>{{.GameType}}</div>
+				<div>{{.DurationStr}}</div>
+				<div>{{.MapID}}</div>
+			</div>
+		</div>
+		<div class="fname">{{truncate .Filename}} ({{.SizeStr}})</div>
+	</a>
+	</div>
 {{else}}
-    <h2>No demos found..</h2>
+	<h3>No demos found..</h3>
+{{end}}
+</div>
+
+<h2>Other gametypes</h2>
+{{if .Others}}
+<h4>Showing {{len .Duels}} demos, most recent first</h4>
+{{end}}
+{{range .Others}}
+	<div class="demo other">
+		<div class="date">{{.TimeStr}}</div>
+		<div class="match">
+			<div class="pic">
+				<img src="https://www.warsow.gg/site-images/levelshots/{{.MapID}}.jpg" class="levelpic" />
+			</div>
+			<div class="info">
+				<div>{{.GameType}}</div>
+				<div>{{.DurationStr}}</div>
+				<div>{{.MapID}}</div>
+			</div>
+		</div>
+		<div class="fname"><a title="{{.Filename}}" href="{{.URL}}">{{truncate .Filename}} ({{.SizeStr}})</a></div>
+	</div>
+{{else}}
+	<h3>No demos found..</h3>
 {{end}}
 </div>
 </body>

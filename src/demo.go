@@ -33,8 +33,14 @@ type Demo struct {
 	Score2      int
 }
 
+type ByDate []Demo
+
+func (a ByDate) Len() int           { return len(a) }
+func (a ByDate) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+func (a ByDate) Less(i, j int) bool { return a[i].Time.After(a[j].Time) }
+
 func datestr(date time.Time) string {
-	return date.Format(time.RFC1123)
+	return date.Format(time.RFC822)
 }
 
 func durationstr(duration int) string {
@@ -63,7 +69,7 @@ func getDemos() ([]Demo, error) {
 		// Get basic file data
 		demo := Demo{
 			Filename: file.Name(),
-			URL:      "/static/" + file.Name(),
+			URL:      "/demos/" + file.Name(),
 			Size:     file.Size(),
 			SizeStr:  hrsize(file.Size()),
 		}
