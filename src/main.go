@@ -68,8 +68,8 @@ func main() {
 	basepath = flag.String("basepath", "/", "Base URL from which the page is accessed")
 	flag.Parse()
 
-	http.Handle(*basepath+"/static/", http.StripPrefix("/static/", http.FileServer(http.Dir(filepath.Join(*root, "static")))))
-	http.Handle(*basepath+"/demos/", http.StripPrefix("/demos/", http.FileServer(http.Dir(*demos))))
+	http.Handle(*basepath+"/static/", http.StripPrefix(*basepath+"/static/", http.FileServer(http.Dir(filepath.Join(*root, "static")))))
+	http.Handle(*basepath+"/demos/", http.StripPrefix(*basepath+"/demos/", http.FileServer(http.Dir(*demos))))
 	http.HandleFunc("/", webview)
 	http.ListenAndServe(*bind, nil)
 }
