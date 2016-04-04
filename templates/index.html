@@ -130,7 +130,7 @@
 <div class="demos">
 {{range .Duels}}
 	<div class="demo">
-	<a title="{{.Filename}}" href="{{.URL}}">
+	<a title="{{.Filename}}" href="{{$.BaseURL}}{{.URL}}">
 		<div class="date">{{.TimeStr}}</div>
 		<div class="match">
 			<div class="pic">
@@ -167,6 +167,7 @@
 {{end}}
 {{range .Others}}
 	<div class="demo other">
+	<a title="{{.Filename}}" href="{{$.BaseURL}}{{.URL}}">
 		<div class="date">{{.TimeStr}}</div>
 		<div class="match">
 			<div class="pic">
@@ -178,7 +179,8 @@
 				<div>{{.MapID}}</div>
 			</div>
 		</div>
-		<div class="fname"><a title="{{.Filename}}" href="{{$.BaseURL}}/{{.URL}}">{{truncate .Filename}} ({{.SizeStr}})</a></div>
+		<div class="fname">{{truncate .Filename}} ({{.SizeStr}})</div>
+		</a>
 	</div>
 {{else}}
 	<h3>No demos found..</h3>
