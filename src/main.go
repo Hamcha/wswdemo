@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"path/filepath"
 	"sort"
+	"strings"
 )
 
 var demos *string
@@ -20,8 +21,34 @@ func truncate(str string) string {
 	return str
 }
 
+func colornick(str string) template.HTML {
+	open := 0
+	cur := 0
+	colors := []string{"black", "red", "green", "yellow", "blue", "cyan", "purple", "white", "orange", "grey"}
+	for {
+		index := strings.Index(str[cur:], "^")
+		if index < 0 || len(str) < cur+index+2 {
+			break
+		}
+		colorid := int(str[cur+index+1] - '0')
+		if colorid < 0 || colorid > 9 {
+			cur += index + 1
+			continue
+		}
+		str = str[0:cur+index] + "<span style=\"color: " + colors[colorid] + "\">" + str[cur+index+2:]
+		open += 1
+		cur = index + 1
+	}
+	for open > 0 {
+		str += "</span>"
+		open -= 1
+	}
+	return template.HTML(str)
+}
+
 var funcMap = template.FuncMap{
-	"truncate": truncate,
+	"truncate":  truncate,
+	"colornick": colornick,
 }
 
 func webview(rw http.ResponseWriter, req *http.Request) {
