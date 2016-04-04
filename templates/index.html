@@ -9,13 +9,13 @@
 		font-family: 'HemiHead';
 		font-style: normal;
 		font-weight: normal;
-		src: local('HemiHeadFourTwentySix-Regular'), url('{{.BaseURL}}static/hemi head 426.woff') format('woff');
+		src: local('HemiHeadFourTwentySix-Regular'), url('{{.BaseURL}}/static/hemi head 426.woff') format('woff');
 	}
 	@font-face {
 		font-family: 'Warsow';
 		font-style: normal;
 		font-weight: normal;
-		src: local('warsow-Regular'), url('{{.BaseURL}}static/ldrwswbeta.woff') format('woff');
+		src: local('warsow-Regular'), url('{{.BaseURL}}/static/ldrwswbeta.woff') format('woff');
 	}
 	body {
 		font-family: 'Lato', sans-serif;
@@ -178,7 +178,7 @@
 				<div>{{.MapID}}</div>
 			</div>
 		</div>
-		<div class="fname"><a title="{{.Filename}}" href="{{.BaseURL}}{{.URL}}">{{truncate .Filename}} ({{.SizeStr}})</a></div>
+		<div class="fname"><a title="{{.Filename}}" href="{{$.BaseURL}}/{{.URL}}">{{truncate .Filename}} ({{.SizeStr}})</a></div>
 	</div>
 {{else}}
 	<h3>No demos found..</h3>
