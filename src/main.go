@@ -10,6 +10,7 @@ import (
 
 var demos *string
 var root *string
+var basepath *string
 
 func truncate(str string) string {
 	const size = 20
@@ -47,9 +48,11 @@ func webview(rw http.ResponseWriter, req *http.Request) {
 	}
 
 	err = t.Execute(rw, struct {
-		Duels  []Demo
-		Others []Demo
+		BaseURL string
+		Duels   []Demo
+		Others  []Demo
 	}{
+		basepath,
 		duels,
 		others,
 	})
@@ -62,10 +65,11 @@ func main() {
 	bind := flag.String("bind", ":8353", "Address:Port to bind the webserver to")
 	demos = flag.String("demofolder", "demos", "Folder containing the demos to serve")
 	root = flag.String("root", ".", "Folder containing the static and templates folders")
+	basepath = flag.String("basepath", "/", "Base URL from which the page is accessed")
 	flag.Parse()
 
-	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir(filepath.Join(*root, "static")))))
-	http.Handle("/demos/", http.StripPrefix("/demos/", http.FileServer(http.Dir(*demos))))
+	http.Handle(basepath+"static/", http.StripPrefix("/static/", http.FileServer(http.Dir(filepath.Join(*root, "static")))))
+	http.Handle(basepath+"demos/", http.StripPrefix("/demos/", http.FileServer(http.Dir(*demos))))
 	http.HandleFunc("/", webview)
 	http.ListenAndServe(*bind, nil)
 }
